@@ -1,3 +1,6 @@
+@import "mixin";
+@import "variables";
+
 body {
   font-family: "Inter", sans-serif;
   font-style: normal;
@@ -5,41 +8,75 @@ body {
 }
 
 .container {
-  padding: 0 30px;
+  width: 100%;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
-  gap: 27px;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 30px;
+    gap: 27px;
+  }
 }
 
 h1 {
-  color: #000;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 32px;
-  letter-spacing: -0.2px;
+  @include text(
+    $size: 24px,
+    $weight: $font-weight-bold,
+    $line: 32px,
+    $color: $color-black
+  );
   text-align: start;
 }
 
 .nav {
   width: 100%;
-  background-color: #fff;
+  background-color: $color-white;
   display: flex;
-  height: 52px;
+  height: 42px;
   border-radius: 4px;
   box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.13) inset;
 }
 
+@media (min-width: 768px) {
+  .nav {
+    height: 52px;
+  }
+}
+
 .nav-link {
-  color: #000;
+  color: $color-black;
   display: flex;
   height: 100%;
   align-items: center;
   justify-content: center;
-  padding: 10px 36px;
-  min-width: 80px;
-  white-space: nowrap;
-  flex-shrink: 0;
+  min-width: 50px;
+  padding: 6px 10px;
+  @include text($line: 16px);
+}
+
+@media (min-width: 768px) {
+  .nav-link {
+    min-width: 68px;
+    padding: 10px 36px;
+    @include text;
+  }
+}
+
+@media (min-width: 1440px) {
+  .nav-link {
+    min-width: 80px;
+    @include text($size: 16px, $line: 24px);
+  }
 }
 
 .active-link {
@@ -48,7 +85,7 @@ h1 {
 
 .table {
   width: 100%;
-  background-color: #fff;
+  background-color: $color-white;
   border-radius: 12px;
   border-collapse: collapse;
 }
@@ -65,7 +102,7 @@ h1 {
 
 .table-elem {
   height: 44px;
-  border-top: 1px solid #e3e3e3;
+  border-top: 1px solid $color-border;
 }
 
 .delete-icon {
@@ -100,18 +137,32 @@ h1 {
   background-color: #f2f2f2;
   border-radius: 8px;
   width: 45px;
-  color: #616161;
+  color: $color-gray;
   padding: 2px 8px;
 }
 
 .wrapper {
   margin-top: 10px;
   width: 100%;
-  height: 28px;
+  min-height: 28px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: -20px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -10px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wrapper {
+    margin-bottom: -20px;
+  }
 }
 
 .headers-wrapper {
@@ -120,10 +171,7 @@ h1 {
 }
 
 .headers {
-  color: #616161;
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 20px;
+  @include text($color: $color-gray);
 }
 
 .btn-wrapper {
@@ -134,8 +182,7 @@ h1 {
 
 .btn {
   padding: 6px 12px;
-  border-radius: 8px;
-  background-color: #fff;
+  @include btn;
   box-shadow: 0 -1px 0 0 #b5b5b5 inset, -1px 0 0 0 #e3e3e3 inset,
     1px 0 0 0 #e3e3e3 inset, 0 1px 0 0 #e3e3e3 inset;
 }
@@ -152,13 +199,10 @@ h1 {
 }
 
 .btn-link {
-  color: #fff;
   padding: 6px 12px;
-  border-radius: 8px;
-  background-color: #fff;
+  @include btn($bg: $color-dark, $color: $color-white);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4),
     0 2px 4px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2);
-  background-color: #303030;
 }
 
 .btn-link:hover {
@@ -177,10 +221,7 @@ h1 {
 
 .title {
   margin-bottom: 12px;
-  color: #303030;
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 20px;
+  @include text($color: $color-dark);
 }
 
 .input {
@@ -195,7 +236,8 @@ h1 {
 }
 
 .img-wrapper {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   height: 420px;
   background-color: #fff;
   border-radius: 12px;
@@ -208,10 +250,7 @@ h1 {
 }
 
 .text {
-  color: #303030;
-  font-size: 14px;
-  font-weight: 650;
-  line-height: 20px;
+  @include text($weight: $font-weight-bold, $color: $color-dark);
   margin-bottom: 6px;
 }
 
@@ -221,10 +260,7 @@ h1 {
 }
 
 .little-text {
-  color: #303030;
-  font-size: 12px;
-  font-weight: 450;
-  line-height: 16px;
+  @include text($size: 12px, $line: 16px, $color: $color-dark);
   margin-bottom: 16px;
 }
 
@@ -236,13 +272,25 @@ h1 {
   margin-bottom: 20px;
 }
 
+.list-link {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .list-link {
+    font-size: 16px;
+  }
+}
+
 .h3 {
-  color: #303030;
-  font-size: 20px;
-  font-weight: 650;
-  line-height: 24px;
   letter-spacing: -0.2px;
   margin-bottom: 12px;
+  @include text(
+    $size: 20px,
+    $weight: $font-weight-bold,
+    $line: 24px,
+    $color: $color-dark
+  );
 }
 
 .list-item {
@@ -259,17 +307,30 @@ h1 {
 
 .section {
   display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-top: -40px;
   margin-bottom: 20px;
 }
 
+@media (min-width: 768px) {
+  .section {
+    flex-direction: row;
+  }
+}
+
 .formula {
-  width: 50%;
+  width: 100%;
   background-color: #fff;
   border-radius: 8px;
   padding: 28px 20px;
-  height: 632px;
+}
+
+@media only screen and (min-width: 768px) {
+  .formula {
+    width: 50%;
+    height: 632px;
+  }
 }
 
 .formula-wrapper {
@@ -279,10 +340,12 @@ h1 {
 }
 
 .formula-text {
-  color: #303030;
-  font-size: 20px;
-  font-weight: 650;
-  line-height: 24px;
+  @include text(
+    $size: 20px,
+    $weight: $font-weight-bold,
+    $line: 24px,
+    $color: $color-dark
+  );
   letter-spacing: -0.2px;
 }
 
@@ -291,17 +354,11 @@ h1 {
 }
 
 .label-text {
-  color: #303030;
-  font-size: 13px;
-  font-weight: 450;
-  line-height: 20px;
+  @include text($color: $color-dark);
 }
 
 .label-bottom-text {
-  color: #616161;
-  font-size: 13px;
-  font-weight: 450;
-  line-height: 20px;
+  @include text($color: $color-gray);
 }
 
 .box {
@@ -312,10 +369,7 @@ h1 {
 }
 
 .box-text {
-  color: #616161;
-  font-size: 13px;
-  font-weight: 450;
-  line-height: 20px;
+  @include text($color: $color-gray);
   margin-bottom: 4px;
 }
 
@@ -341,21 +395,15 @@ h1 {
 }
 
 .box-list-item-text {
-  color: #303030;
-  font-size: 13px;
-  font-weight: 650;
-  line-height: 20px;
+  @include text($weight: $font-weight-bold, $color: $color-dark);
 }
 
 .box-btn {
   width: 100%;
-  color: #fff;
   padding: 6px 12px;
-  border-radius: 8px;
-  background-color: #fff;
+  @include btn($bg: $color-dark, $color: $color-white);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4),
     0 2px 4px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2);
-  background-color: #303030;
 }
 
 .box-btn:hover {
@@ -364,10 +412,16 @@ h1 {
 }
 
 .inner-section {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+@media only screen and (min-width: 768px) {
+  .inner-section {
+    width: 50%;
+  }
 }
 
 .collections {
@@ -385,10 +439,12 @@ h1 {
 }
 
 .collections-text {
-  color: #303030;
-  font-size: 20px;
-  font-weight: 650;
-  line-height: 24px;
+  @include text(
+    $size: 20px,
+    $weight: $font-weight-bold,
+    $line: 24px,
+    $color: $color-dark
+  );
   letter-spacing: -0.2px;
   margin-bottom: 12px;
 }
@@ -403,6 +459,11 @@ h1 {
   position: relative;
 }
 
+.line,
+.checkbox-checkmark {
+  @include checkbox-base;
+}
+
 .line::before {
   content: "";
   position: absolute;
@@ -413,19 +474,6 @@ h1 {
   border-radius: 2px;
   background-color: white;
   transform: translate(-50%, -50%);
-}
-
-.line {
-  width: 20px;
-  height: 20px;
-  background-color: #fdfdfd;
-  border-radius: 4px;
-  border: 1px solid #8a8a8a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .line::after {
@@ -448,19 +496,6 @@ h1 {
 
 .checkbox:checked + .checkbox-checkmark {
   background-color: #303030;
-}
-
-.checkbox-checkmark {
-  width: 20px;
-  height: 20px;
-  background-color: #fdfdfd;
-  border-radius: 4px;
-  border: 1px solid #8a8a8a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .checkbox-checkmark::after {
@@ -490,22 +525,17 @@ h1 {
 
 .collections-btn-cancel {
   width: 100%;
-  color: #303030;
   padding: 6px 12px;
-  border-radius: 8px;
-  background-color: #fff;
+  @include btn;
   box-shadow: 0 -1px 0 0 #b5b5b5 inset, -1px 0 0 0 #e3e3e3 inset,
     1px 0 0 0 #e3e3e3 inset, 0 1px 0 0 #e3e3e3 inset;
 }
 
 .collections-btn-save {
   width: 100%;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 8px;
+  @include btn($bg: $color-dark, $color: $color-white);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4),
     0 2px 4px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2);
-  background-color: #303030;
 }
 
 .collections-btn-save:hover {
