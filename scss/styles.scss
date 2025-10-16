@@ -118,8 +118,20 @@ h1 {
 }
 
 .table-link {
-  color: #005bd3;
+  @include text($size: 10px, $color: #005bd3);
   padding-left: 8px;
+}
+
+@media (min-width: 425px) {
+  .table-link {
+    @include text($size: 13px, $color: #005bd3);
+  }
+}
+
+@media (min-width: 768px) {
+  .table-link {
+    @include text($size: 16px, $color: #005bd3);
+  }
 }
 
 .delete-button {
