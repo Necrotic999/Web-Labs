@@ -142,8 +142,29 @@ h1 {
 }
 
 .table-link {
+  font-size: 10px;
+  font-weight: 450;
+  line-height: 20px;
   color: #005bd3;
   padding-left: 8px;
+}
+
+@media (min-width: 425px) {
+  .table-link {
+    font-size: 13px;
+    font-weight: 450;
+    line-height: 20px;
+    color: #005bd3;
+  }
+}
+
+@media (min-width: 768px) {
+  .table-link {
+    font-size: 16px;
+    font-weight: 450;
+    line-height: 20px;
+    color: #005bd3;
+  }
 }
 
 .delete-button {
